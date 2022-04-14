@@ -13,6 +13,8 @@ import Setting from './pages/Setting';
 const App = () => {
   const [auth, setAuth] = useState(null);
 
+
+
   useEffect(() => {
     let u = localStorage.getItem("user");
     u && JSON.parse(u) ? setAuth(true) : setAuth(false);
@@ -25,7 +27,8 @@ const App = () => {
   return (
    <Router>
    
-<div style={{float: 'right'}}><Sidebar/></div>
+<Sidebar/>
+
     <Routes>
       {!auth && (
         <Route
@@ -41,19 +44,16 @@ const App = () => {
             path="/profile"
             element={<Sidebar logout={ () => setAuth(false)} />}
           />
-      
-          <Route  path="/setting" element={<Setting/>} />
+          
+          <Route  path="/setting " element={<Setting />} />
           <Route path="/transaction" element={<Transaction/>}/>
           <Route  path='/card' element={<Card/>} />
-          <Route path='/home' element={<Sidebar/>} />
-          <Route  path="/setting" element={<Setting/>} />
           <Route path='/login' element={<Login/>} />
-      
-      
+   
           
         </>
       )}
-      <Route path="*" element={<Navigate to={auth ? "/profile" : "/auth"} />} />
+      <Route path="*" element={<Navigate to={!auth ? "/auth": "/profile"} />} />
 
 
     </Routes>

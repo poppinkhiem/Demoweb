@@ -5,7 +5,10 @@ import { Link } from 'react-router-dom';
 import Setting from '../pages/Setting';
 import Transaction from '../pages/Transaction';
 import '../style/Sidebar.css';
+import Header from './Header';
 import { SidebarData } from './SidebarData';
+import TableData from './TableData';
+
 
 
 const Sidebar=({logout}) =>{
@@ -30,6 +33,7 @@ const Sidebar=({logout}) =>{
               fontZize: '20px',
               marginLeft: '10px',
               marginTop: '10px',
+              
               padding: '5px',
               borderRadius: '13px',
           
@@ -55,9 +59,7 @@ const Sidebar=({logout}) =>{
 
         
       </ IconContext.Provider>
-      <div style={{backgroundColor: 'pink', width: '100vh', float: 'right' }}>
-   TABLE
-      </div  >
+   
      
 
       </div>

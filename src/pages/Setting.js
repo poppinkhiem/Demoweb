@@ -1,7 +1,9 @@
 import React from 'react'
-function Setting() {
+function Setting({logout}) {
   return (
-    <div  className='container' style={{float: 'right'}}>Setting..................... </div>
+    <div  className='container' style={{float: 'right'}}>
+      
+      Setting Here..................... </div>
   )
 }
 

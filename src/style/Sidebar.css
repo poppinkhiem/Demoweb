@@ -62,3 +62,23 @@ span {
 
 li:nth-child(5)
 {margin-top: 40vh;}
+
+.grid-container{
+  display: grid;
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
+  grid-template-areas: "header   header   header"
+                       "main     main     sidebar";                   
+}
+.Sidebar {
+  grid-area: sidebar;
+  background-color: #060b26;
+
+}
+.content{
+  grid-area: main;
+}
+.header{
+  grid-area: header;
+}
