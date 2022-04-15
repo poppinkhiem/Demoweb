@@ -1,68 +1,88 @@
-
 import { useNavigate } from "react-router-dom";
-
-
-
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-
+import "../style/Login.css";
 const schema = yup.object().shape({
- username: yup.string().min(8).max(12).required(),
-  password: yup.number().min(4).max(8).required(),
-}); 
-
-
+  username: yup.string().min(4).max(12).required(),
+  password: yup.string().min(8).max(20).required(),
+});
 
 const Auth = ({ authenticate }) => {
-  const navigate = useNavigate(); 
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const onClick = () => {
-    authenticate();
-    navigate("home");
+    if (
+      username === localStorage.getItem("username") &&
+      password === localStorage.getItem("password")
+    ) {
+      authenticate();
+      navigate("home");
+    } else {
+      console.log("Wrong");
+    }
   };
-  const { register, handleSubmit, formState: { errors } } = useForm({
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
   });
 
-
-
   function handleSignup(e) {
-    
-    const pass = localStorage.setItem("password", 'khiem');
-    const user = localStorage.setItem("username", 8888888);
+    var pass = localStorage.setItem("password", "Aa123456");
+    var user = localStorage.setItem("username", "khiem");
   }
 
-
-
- function Logout()
- {
-   localStorage.clear();
- }
+  function Logout() {
+    localStorage.clear();
+  }
   const onSubmit = (data) => console.log(data);
 
-
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
+  const [passwordShown, setPasswordShown] = useState(false);
 
   return (
     <>
-    <form onSubmit={handleSubmit(onSubmit)} style={{float: 'right'}}>
-      <input placeholder="Username" {...register('username', { required: true } )} />
-      <p>{errors.username?.message}</p>
-      <input  name="password"
-        type="password" placeholder="Password "{...register('password', { required: true } )} />
-      <p>{errors.password?.message}</p>
- 
-      <input type="submit" />
-      <button onClick={handleSignup}> Sign Up</button>
-      <button onClick={Logout}> Logout</button>
-         
-
-
-    </form>
-
+      <form onSubmit={handleSubmit(onClick)}>
+        <input
+          placeholder="Username"
+          {...register("username", { required: true })}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <p>{errors.username?.message}</p>
+        <input
+          placeholder="Password"
+          type={passwordShown ? "text" : "password"}
+          {...register("password", { required: true })}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <p>{errors.password?.message}</p>
+        <br />
+        <input type="submit" className="button" value="Log In"/>
+        <br />
+        <button onClick={handleSignup}>
+          {" "}
+          <span>Sign Up</span>
+        </button>
+        <br />
+        <button onClick={Logout}>
+          <span>Clear</span>
+        </button>
+        <br />
+        <button onClick={togglePassword}>
+          <span>Show Password</span>
+        </button>
+      </form>
     </>
   );
-}
+};
 export default Auth;

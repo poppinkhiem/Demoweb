@@ -28,7 +28,7 @@ const card = [
 
 function Card() {
   return (
-    <> <div style={{float: 'right'}}>
+    <> <div style={{alignItems: 'center'}}>
       <ol>
         {card.map(function cards(c) {
           return <li>{c.name}</li>;
