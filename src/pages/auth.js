@@ -10,8 +10,8 @@ import * as yup from "yup";
 
 
 const schema = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().min(8).max(12).required(),
+ username: yup.string().min(8).max(12).required(),
+  password: yup.number().min(4).max(8).required(),
 }); 
 
 
@@ -23,30 +23,40 @@ const Auth = ({ authenticate }) => {
     authenticate();
     navigate("home");
   };
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
+
+
+
   function handleSignup(e) {
     
     const pass = localStorage.setItem("password", 'khiem');
     const user = localStorage.setItem("username", 8888888);
   }
 
+
+
+ function Logout()
+ {
+   localStorage.clear();
+ }
   const onSubmit = (data) => console.log(data);
 
 
 
   return (
     <>
-    <form onSubmit={handleSubmit(onClick)} style={{float: 'right'}}>
-      <input {...register('email')} type="email" />
-      <p>{errors.email?.message}</p>
-      <input {...register('password', { required: true })} />
-      {errors.email && <p>email name is required.</p>}
-      <input {...register('age', { pattern: /\d+/ })} />
+    <form onSubmit={handleSubmit(onSubmit)} style={{float: 'right'}}>
+      <input placeholder="Username" {...register('username', { required: true } )} />
+      <p>{errors.username?.message}</p>
+      <input  name="password"
+        type="password" placeholder="Password "{...register('password', { required: true } )} />
       <p>{errors.password?.message}</p>
+ 
       <input type="submit" />
       <button onClick={handleSignup}> Sign Up</button>
+      <button onClick={Logout}> Logout</button>
          
 
 

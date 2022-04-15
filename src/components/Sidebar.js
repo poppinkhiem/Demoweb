@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+
+  Outlet,
+} from "react-router-dom";
 import { IconContext } from 'react-icons';
 import * as AiIcons from 'react-icons/ai';
 import { Link } from 'react-router-dom';
@@ -56,7 +60,7 @@ const Sidebar=({logout}) =>{
 
 
         </nav>
-
+        <Outlet/>
         
       </ IconContext.Provider>
    
